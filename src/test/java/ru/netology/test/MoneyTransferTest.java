@@ -1,15 +1,20 @@
 package ru.netology.test;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import ru.netology.data.DataHelper;
 import ru.netology.page.LoginPage;
-
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 public class MoneyTransferTest {
 
+    @Order(1)
     @Test
     void shouldTransferMoneyToCard1() {
         var loginPage = open("http://localhost:9999", LoginPage.class);
@@ -33,6 +38,7 @@ public class MoneyTransferTest {
         assertEquals(expectedSumOnSecondCard, actualSumOnSecondCard);
     }
 
+    @Order(2)
     @Test
     void shouldTransferMoneyToCard2() {
         var loginPage = open("http://localhost:9999", LoginPage.class);
@@ -56,6 +62,7 @@ public class MoneyTransferTest {
         assertEquals(expectedSumOnSecondCard, actualSumOnSecondCard);
     }
 
+    @Order(3)
     @Test
     void shouldTryNotToTransferMoreThanAvailableSum() {
         var loginPage = open("http://localhost:9999", LoginPage.class);
